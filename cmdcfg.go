@@ -5,4 +5,4 @@ package wkhtmltopdf
 
 import "os/exec"
 
-func cmdConfig(cmd *exec.Cmd) {}
+func cmdConfig(cmd *exec.Cmd) { _ = "STUB: not implemented"; return }

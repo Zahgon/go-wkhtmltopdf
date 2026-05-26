@@ -1,10 +1,5 @@
 package wkhtmltopdf
 
-import (
-	"fmt"
-	"reflect"
-)
-
 const opt = "--"
 
 // A list of options that can be set from code to make it easier to see which options are available
@@ -45,9 +40,7 @@ type globalOptions struct {
 	Version           boolOption   // Output version information and exit
 }
 
-func (gopt *globalOptions) Args() []string {
-	return optsToArgs(gopt)
-}
+func (gopt *globalOptions) Args() []string { _ = "STUB: not implemented"; return nil }
 
 type outlineOptions struct {
 	DumpDefaultTocXsl boolOption   // Dump the default TOC xsl style sheet to stdout
@@ -56,9 +49,7 @@ type outlineOptions struct {
 	OutlineDepth      uintOption   // Set the depth of the outline (default 4)
 }
 
-func (oopt *outlineOptions) Args() []string {
-	return optsToArgs(oopt)
-}
+func (oopt *outlineOptions) Args() []string { _ = "STUB: not implemented"; return nil }
 
 type pageOptions struct {
 	Allow                     sliceOption  // Allow the file or files from the specified folder to be loaded (repeatable)
@@ -111,9 +102,7 @@ type pageOptions struct {
 	Zoom                      floatOption  // Use this zoom factor (default 1)
 }
 
-func (popt *pageOptions) Args() []string {
-	return optsToArgs(popt)
-}
+func (popt *pageOptions) Args() []string { _ = "STUB: not implemented"; return nil }
 
 type headerAndFooterOptions struct {
 	FooterCenter   stringOption // Centered footer text
@@ -135,9 +124,7 @@ type headerAndFooterOptions struct {
 	Replace        mapOption    // Replace [name] with value in header and footer (repeatable)
 }
 
-func (hopt *headerAndFooterOptions) Args() []string {
-	return optsToArgs(hopt)
-}
+func (hopt *headerAndFooterOptions) Args() []string { _ = "STUB: not implemented"; return nil }
 
 type tocOptions struct {
 	DisableDottedLines  boolOption   // Do not use dotted lines in the toc
@@ -148,9 +135,7 @@ type tocOptions struct {
 	XslStyleSheet       stringOption // Use the supplied xsl style sheet for printing the table of content
 }
 
-func (topt *tocOptions) Args() []string {
-	return optsToArgs(topt)
-}
+func (topt *tocOptions) Args() []string { _ = "STUB: not implemented"; return nil }
 
 type argParser interface {
 	Parse() []string //  Used in the cmd call
@@ -161,77 +146,33 @@ type stringOption struct {
 	value  string
 }
 
-func (so stringOption) Parse() []string {
-	args := make([]string, 0)
-	if so.value == "" {
-		return args
-	}
-	args = append(args, opt+so.option)
-	args = append(args, so.value)
-	return args
-}
+func (so stringOption) Parse() []string { _ = "STUB: not implemented"; return nil }
 
-func (so *stringOption) Set(value string) {
-	so.value = value
-}
+func (so *stringOption) Set(value string) { _ = "STUB: not implemented"; return }
 
-func (so *stringOption) Unset() {
-	so.value = ""
-}
+func (so *stringOption) Unset() { _ = "STUB: not implemented"; return }
 
 type sliceOption struct {
 	option string
 	value  []string
 }
 
-func (so sliceOption) Parse() []string {
-	args := make([]string, 0)
-	if len(so.value) == 0 {
-		return args
-	}
-	for _, v := range so.value {
-		args = append(args, opt+so.option)
-		args = append(args, v)
-	}
-	return args
-}
+func (so sliceOption) Parse() []string { _ = "STUB: not implemented"; return nil }
 
-func (so *sliceOption) Set(value string) {
-	so.value = append(so.value, value)
-}
+func (so *sliceOption) Set(value string) { _ = "STUB: not implemented"; return }
 
-func (so *sliceOption) Unset() {
-	so.value = nil
-}
+func (so *sliceOption) Unset() { _ = "STUB: not implemented"; return }
 
 type mapOption struct {
 	option string
 	value  map[string]string
 }
 
-func (mo mapOption) Parse() []string {
-	args := make([]string, 0)
-	if mo.value == nil || len(mo.value) == 0 {
-		return args
-	}
-	for k, v := range mo.value {
-		args = append(args, opt+mo.option)
-		args = append(args, k)
-		args = append(args, v)
-	}
-	return args
-}
+func (mo mapOption) Parse() []string { _ = "STUB: not implemented"; return nil }
 
-func (mo *mapOption) Set(key, value string) {
-	if mo.value == nil {
-		mo.value = make(map[string]string)
-	}
-	mo.value[key] = value
-}
+func (mo *mapOption) Set(key, value string) { _ = "STUB: not implemented"; return }
 
-func (mo *mapOption) Unset() {
-	mo.value = nil
-}
+func (mo *mapOption) Unset() { _ = "STUB: not implemented"; return }
 
 type uintOption struct {
 	option string
@@ -239,24 +180,11 @@ type uintOption struct {
 	isSet  bool
 }
 
-func (io uintOption) Parse() []string {
-	args := make([]string, 0)
-	if io.isSet == false {
-		return args
-	}
-	args = append(args, opt+io.option)
-	args = append(args, fmt.Sprintf("%d", io.value))
-	return args
-}
+func (io uintOption) Parse() []string { _ = "STUB: not implemented"; return nil }
 
-func (io *uintOption) Set(value uint) {
-	io.isSet = true
-	io.value = value
-}
+func (io *uintOption) Set(value uint) { _ = "STUB: not implemented"; return }
 
-func (io *uintOption) Unset() {
-	io.isSet = false
-}
+func (io *uintOption) Unset() { _ = "STUB: not implemented"; return }
 
 type floatOption struct {
 	option string
@@ -264,196 +192,37 @@ type floatOption struct {
 	isSet  bool
 }
 
-func (fo floatOption) Parse() []string {
-	args := make([]string, 0)
-	if fo.isSet == false {
-		return args
-	}
-	args = append(args, opt+fo.option)
-	args = append(args, fmt.Sprintf("%.3f", fo.value))
-	return args
-}
+func (fo floatOption) Parse() []string { _ = "STUB: not implemented"; return nil }
 
-func (fo *floatOption) Set(value float64) {
-	fo.isSet = true
-	fo.value = value
-}
+func (fo *floatOption) Set(value float64) { _ = "STUB: not implemented"; return }
 
-func (fo *floatOption) Unset() {
-	fo.isSet = false
-}
+func (fo *floatOption) Unset() { _ = "STUB: not implemented"; return }
 
 type boolOption struct {
 	option string
 	value  bool
 }
 
-func (bo boolOption) Parse() []string {
-	if bo.value {
-		return []string{opt + bo.option}
-	}
-	return []string{}
-}
+func (bo boolOption) Parse() []string { _ = "STUB: not implemented"; return nil }
 
-func (bo *boolOption) Set(value bool) {
-	bo.value = value
-}
+func (bo *boolOption) Set(value bool) { _ = "STUB: not implemented"; return }
 
-func (bo *boolOption) Unset() {
-	bo.value = false
-}
+func (bo *boolOption) Unset() { _ = "STUB: not implemented"; return }
 
-func newGlobalOptions() globalOptions {
-	return globalOptions{
-		CookieJar:         stringOption{option: "cookie-jar"},
-		Copies:            uintOption{option: "copies"},
-		Dpi:               uintOption{option: "dpi"},
-		ExtendedHelp:      boolOption{option: "extended-help"},
-		Grayscale:         boolOption{option: "grayscale"},
-		Help:              boolOption{option: "help"},
-		HTMLDoc:           boolOption{option: "htmldoc"},
-		ImageDpi:          uintOption{option: "image-dpi"},
-		ImageQuality:      uintOption{option: "image-quality"},
-		License:           boolOption{option: "license"},
-		LogLevel:          stringOption{option: "log-level"},
-		LowQuality:        boolOption{option: "lowquality"},
-		ManPage:           boolOption{option: "manpage"},
-		MarginBottom:      uintOption{option: "margin-bottom"},
-		MarginBottomUnit:  stringOption{option: "margin-bottom"},
-		MarginLeft:        uintOption{option: "margin-left"},
-		MarginLeftUnit:    stringOption{option: "margin-left"},
-		MarginRight:       uintOption{option: "margin-right"},
-		MarginRightUnit:   stringOption{option: "margin-right"},
-		MarginTop:         uintOption{option: "margin-top"},
-		MarginTopUnit:     stringOption{option: "margin-top"},
-		NoCollate:         boolOption{option: "no-collate"},
-		NoPdfCompression:  boolOption{option: "no-pdf-compression"},
-		Orientation:       stringOption{option: "orientation"},
-		PageHeight:        uintOption{option: "page-height"},
-		PageHeightUnit:    stringOption{option: "page-height"},
-		PageSize:          stringOption{option: "page-size"},
-		PageWidth:         uintOption{option: "page-width"},
-		PageWidthUnit:     stringOption{option: "page-width"},
-		Quiet:             boolOption{option: "quiet"},
-		ReadArgsFromStdin: boolOption{option: "read-args-from-stdin"},
-		Readme:            boolOption{option: "readme"},
-		Title:             stringOption{option: "title"},
-		Version:           boolOption{option: "version"},
-	}
-}
+func newGlobalOptions() globalOptions { _ = "STUB: not implemented"; return *new(globalOptions) }
 
-func newOutlineOptions() outlineOptions {
-	return outlineOptions{
-		DumpDefaultTocXsl: boolOption{option: "dump-default-toc-xsl"},
-		DumpOutline:       stringOption{option: "dump-outline"},
-		NoOutline:         boolOption{option: "no-outline"},
-		OutlineDepth:      uintOption{option: "outline-depth"},
-	}
-}
+func newOutlineOptions() outlineOptions { _ = "STUB: not implemented"; return *new(outlineOptions) }
 
-func newPageOptions() pageOptions {
-	return pageOptions{
-		Allow:                     sliceOption{option: "allow"},
-		BypassProxyFor:            sliceOption{option: "bypass-proxy-for"},
-		CacheDir:                  stringOption{option: "cache-dir"},
-		CheckboxCheckedSvg:        stringOption{option: "checkbox-checked-svg"},
-		CheckboxSvg:               stringOption{option: "checkbox-svg"},
-		Cookie:                    mapOption{option: "cookie"},
-		CustomHeader:              mapOption{option: "custom-header"},
-		CustomHeaderPropagation:   boolOption{option: "custom-header-propagation"},
-		DebugJavascript:           boolOption{option: "debug-javascript"},
-		DefaultHeader:             boolOption{option: "default-header"},
-		DisableExternalLinks:      boolOption{option: "disable-external-links"},
-		DisableInternalLinks:      boolOption{option: "disable-internal-links"},
-		DisableJavascript:         boolOption{option: "disable-javascript"},
-		DisableLocalFileAccess:    boolOption{option: "disable-local-file-access"},
-		DisableSmartShrinking:     boolOption{option: "disable-smart-shrinking"},
-		EnableForms:               boolOption{option: "enable-forms"},
-		EnableLocalFileAccess:     boolOption{option: "enable-local-file-access"},
-		EnablePlugins:             boolOption{option: "enable-plugins"},
-		EnableTocBackLinks:        boolOption{option: "enable-toc-back-links"},
-		Encoding:                  stringOption{option: "encoding"},
-		ExcludeFromOutline:        boolOption{option: "exclude-from-outline"},
-		JavascriptDelay:           uintOption{option: "javascript-delay"},
-		KeepRelativeLinks:         boolOption{option: "keep-relative-links"},
-		LoadErrorHandling:         stringOption{option: "load-error-handling"},
-		LoadMediaErrorHandling:    stringOption{option: "load-media-error-handling"},
-		MinimumFontSize:           uintOption{option: "minimum-font-size"},
-		NoBackground:              boolOption{option: "no-background"},
-		NoCustomHeaderPropagation: boolOption{option: "no-custom-header-propagation"},
-		NoImages:                  boolOption{option: "no-images"},
-		NoStopSlowScripts:         boolOption{option: "no-stop-slow-scripts"},
-		PageOffset:                uintOption{option: "page-offset"},
-		Password:                  stringOption{option: "password"},
-		Post:                      mapOption{option: "post"},
-		PostFile:                  mapOption{option: "post-file"},
-		PrintMediaType:            boolOption{option: "print-media-type"},
-		Proxy:                     stringOption{option: "proxy"},
-		ProxyHostnameLookup:       boolOption{option: "proxy-hostname-lookup"},
-		RadiobuttonCheckedSvg:     stringOption{option: "radiobutton-checked-svg"},
-		RadiobuttonSvg:            stringOption{option: "radiobutton-svg"},
-		RunScript:                 sliceOption{option: "run-script"},
-		SslCrtPath:                stringOption{option: "ssl-crt-path"},
-		SslKeyPassword:            stringOption{option: "ssl-key-password"},
-		SslKeyPath:                stringOption{option: "ssl-key-path"},
-		Username:                  stringOption{option: "username"},
-		UserStyleSheet:            stringOption{option: "user-style-sheet"},
-		ViewportSize:              stringOption{option: "viewport-size"},
-		WindowStatus:              stringOption{option: "window-status"},
-		Zoom:                      floatOption{option: "zoom"},
-	}
-}
+func newPageOptions() pageOptions { _ = "STUB: not implemented"; return *new(pageOptions) }
 
 func newHeaderAndFooterOptions() headerAndFooterOptions {
-	return headerAndFooterOptions{
-		FooterCenter:   stringOption{option: "footer-center"},
-		FooterFontName: stringOption{option: "footer-font-name"},
-		FooterFontSize: uintOption{option: "footer-font-size"},
-		FooterHTML:     stringOption{option: "footer-html"},
-		FooterLeft:     stringOption{option: "footer-left"},
-		FooterLine:     boolOption{option: "footer-line"},
-		FooterRight:    stringOption{option: "footer-right"},
-		FooterSpacing:  floatOption{option: "footer-spacing"},
-		HeaderCenter:   stringOption{option: "header-center"},
-		HeaderFontName: stringOption{option: "header-font-name"},
-		HeaderFontSize: uintOption{option: "header-font-size"},
-		HeaderHTML:     stringOption{option: "header-html"},
-		HeaderLeft:     stringOption{option: "header-left"},
-		HeaderLine:     boolOption{option: "header-line"},
-		HeaderRight:    stringOption{option: "header-right"},
-		HeaderSpacing:  floatOption{option: "header-spacing"},
-		Replace:        mapOption{option: "replace"},
-	}
+	_ = "STUB: not implemented"
+	return *new(headerAndFooterOptions)
 }
 
-func newTocOptions() tocOptions {
-	return tocOptions{
-		DisableDottedLines:  boolOption{option: "disable-dotted-lines"},
-		DisableTocLinks:     boolOption{option: "disable-toc-links"},
-		TocHeaderText:       stringOption{option: "toc-header-text"},
-		TocLevelIndentation: uintOption{option: "toc-level-indentation"},
-		TocTextSizeShrink:   floatOption{option: "toc-text-size-shrink"},
-		XslStyleSheet:       stringOption{option: "xsl-style-sheet"},
-	}
-}
+func newTocOptions() tocOptions { _ = "STUB: not implemented"; return *new(tocOptions) }
 
-func optsToArgs(opts interface{}) []string {
-	args := make([]string, 0)
-	rv := reflect.Indirect(reflect.ValueOf(opts))
-	if rv.Kind() != reflect.Struct {
-		return args
-	}
-	for i := 0; i < rv.NumField(); i++ {
-		prsr, ok := rv.Field(i).Interface().(argParser)
-		if ok {
-			s := prsr.Parse()
-			if len(s) > 0 {
-				args = append(args, s...)
-			}
-		}
-	}
-	return args
-}
+func optsToArgs(opts interface{}) []string { _ = "STUB: not implemented"; return nil }
 
 // Constants for orientation modes
 const (
